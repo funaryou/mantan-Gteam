@@ -28,7 +28,7 @@ start:
 
 fstart:
 	@docker compose build
-	@docker compose exec app composer install
-	@docker compose exec app php artisan migrate
+	@docker compose run app composer install
+	@docker compose run app php artisan migrate
 	@docker compose up -d
 	@docker compose run app bash
