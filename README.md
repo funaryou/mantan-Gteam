@@ -13,6 +13,7 @@
 | `make bash-app`       | Laravel コンテナ内に入って操作が可能になります。                   |
 | `make bash-db`        | DB コンテナ内に入って操作が可能になります。                         |
 | `make start`          | `build` → `up -d` → `bash-app` の一連の操作を自動で実行します。    |
+| `make fstart`          | `make start` の工程に'composer install' → `php aritsan migrate` を追加したものです。    |
 
 ### 使い方
 
@@ -34,3 +35,6 @@ make bash-db
 
 # 一括で開発環境を起動してLaravelコンテナに入る
 make start
+
+# 初めて環境を建てる時に、実行すべきコマンドを実行。そして一括で開発環境を起動してコンテナに入る
+make fstart
