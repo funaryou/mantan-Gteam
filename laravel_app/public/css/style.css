@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+/*共通部分
+------------------*/
+html{
+	font-size: 100%;
+}
+body{
+    font-size: 16px;
+	color: #333333;
+	line-height: 1.8;	/*行間*/
+    background-color: #EBE0D3;
+}
+a{
+	text-decoration: none;
+	color: #333333;	/*リンクの色*/
+}
+a:hover{
+	opacity: 0.5;	/*透明度*/
+	transition-duration: 0.3s;	/*変化する時間（秒）*/
+}
+img{
+	max-width: 100%;
+	height: auto;
+}
