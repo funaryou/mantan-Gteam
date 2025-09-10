@@ -23,6 +23,7 @@ body{
 	color: var(--main-text-color);
 	line-height: 1.8;	/*行間*/
     background-color: var(--background-color);
+	overflow: hidden;
 }
 a{
 	text-decoration: none;
@@ -39,21 +40,49 @@ img{
 input[type="radio"] {
 	opacity: 0;
 	position: absolute;
+	cursor: pointer;  
+}
+button{
+	font-weight: bold;
+	cursor: pointer;  
+	border: none;
 }
 
-.fs-24{
-	font-size: 24px;
+.fs-80{
+	font-size: 80px;
+}
+
+.fs-64{
+	font-size: 64px;
 }
 
 .fs-48{
 	font-size: 48px;
 }
 
+.fs-36{
+	font-size: 36px;
+}
+
+.fs-32{
+	font-size: 32px;
+}
+
+.fs-24{
+	font-size: 24px;
+}
+
+.fs-20{
+	font-size: 20px;
+}
+
+.fs-16{
+	font-size: 16px;
+}
+
 .base-shadow{
 	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-
-
 
 input[type="radio"]:checked + label {
 	background-color: var(--button-used-color);
@@ -61,29 +90,68 @@ input[type="radio"]:checked + label {
 input[type="radio"] + label {
 	background-color: var(--button-color);
 }
-  
-  /* ラベルをクリックできるようにする */
-  /* label {
-	cursor: pointer;
-	display: inline-flex;
-	align-items: center;
-  } */
+
+.setup-section{
+	margin: 4% 0;
+	text-align: center;
+	.setup-title{
+		margin-bottom: 2%;
+	}
+	form {
+		width: 100%;
+		gap: 10px;
+		align-items: center;
+		margin: 0 auto;
+	}
+}
 
 .setup-box{
-    display: flex;
-    gap: 10px;
+	display: flex;
+	gap: 10px;
+	margin : 28px auto;
+	justify-content: center;
+}
+
+.setup-button-box{
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 64vh;
+	width: 80%;
+	background-color: var(--modal-background-color);
+	border-radius: 70px;
+	
+
+	button{
+		align-items: center;
+		padding: 12px 80px;
+		margin: 20px auto 0; 
+		border-radius: 53px;
+		color: var(--setup-box-text-color);
+		background-color: var(--button-used-color);
+		min-width: 200px; 
+		p{
+			margin: 0 0;
+		}
+	}
+	
+	button:hover {
+		opacity: 0.8;  /* ホバー効果を追加 */
+		transition: opacity 0.3s;
+	}
 }
 
 .setup-item{
-    display: flex;
-    gap: 10px;
-	width: 100%;
-	text-align: center;
-
 	label{
-		width: 100%;
-		padding: 24px 48px;
+		padding: 12px 48px;
+		margin : 0 auto;
 		border-radius: 53px;
 		color: var(--setup-box-text-color);
+		min-width: 200px;  /* ラベルにも同じ最小幅を設定 */
+		display: inline-block;  /* インラインブロックで幅を適用 */
+		text-align: center;  /* テキストを中央寄せ */
+		box-sizing: border-box;  /* パディングを含めた幅計算 */
 	}
 }

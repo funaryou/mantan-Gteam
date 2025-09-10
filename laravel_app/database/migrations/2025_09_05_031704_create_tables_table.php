@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->integer('number');
-            $table->enum('lang', ['en', 'ja', 'cn'])->default('ja');
+            $table->enum('lang', ['日本語', '中文簡体', 'English'])->default('日本語');
+            $table->enum('person_count', ['1人', '2人', '3人', '4人', '5人以上'])->default('3人');
+            $table->uuid('session_id')->nullable();
+            $table->timestamp('session_expires_at')->nullable();
             $table->timestamps();
         });
     }

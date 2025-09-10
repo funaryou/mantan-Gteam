@@ -11,6 +11,6 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('/client')->group(function () {
     Route::prefix('/menu')->group(function () {
-        Route::post('/search/{id}/{id}', [MenuSearchController::class, 'search'])->name('client.menu.search');
+        Route::post('/search/{BigCategoryId}/{SubCategoryId}', [MenuSearchController::class, 'search'])->name('client.menu.search');
     });
 });
