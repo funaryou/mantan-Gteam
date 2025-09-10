@@ -12,7 +12,7 @@ class CheckTabletSession
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $sessionId = $request->cookie('table_session_id');
+        $sessionId = $request->cookie('tableSessionId');
 
         if ($sessionId) {
             $table = Table::where('session_id', $sessionId)
@@ -23,8 +23,14 @@ class CheckTabletSession
                 return $next($request);
             }
         }
-
-        // セッションが無効なら開始ページへリダイレクト
+        $data = [
+            'sessionId' => $sessionId,
+            'error' => 'セッションが無効です',
+            'success' => false,
+            'next' => $next,
+            'request' => $request,
+        ];    
         return redirect()->route('client.setup.index')->with('error', 'セッションが無効です');
+        // return response()->json($data);
     }
 }
