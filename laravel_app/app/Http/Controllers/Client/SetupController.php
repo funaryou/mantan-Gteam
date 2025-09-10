@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use App\Models\Table;
-
+use Symfony\Component\Console\Completion\Output\BashCompletionOutput;
 class SetupController extends Controller
 {
     //
@@ -15,32 +15,34 @@ class SetupController extends Controller
     {
         $lang = ['日本語', '中文簡体', 'English'];
         $person_count = ['1人', '2人', '3人', '4人', '5人以上'];
-        return view('Page.UserSide.setup', compact('lang', 'person_count'));
+        $view = view('Page.UserSide.setup', compact('lang', 'person_count'));
+        return response($view)->cookie('tableNumber', 900, 60*60*24*30);
     }
 
     public function store(Request $request)
     {
-        $tableNumber = $request->cookie('TableNumber');
+        $tableNumber = intval($request->cookie('tableNumber'));
         if (!$tableNumber) {
-            return redirect()->route('client.menu.index');
+            return redirect()->route('client.menu.top');
         }
+
         $table = Table::where('number', $tableNumber)->first();
-
-        if (!$table) {
-            return response()->json(['error' => 'Table not found.'], 404);
+        // dd($table->toArray());
+        if ($table && $table->session_expires_at > now()) {
+            $response = redirect()->route('client.menu.top');
+            return $response->cookie('tableSessionId', $table->session_id);
         }
-
-        if ($table->session_id && $table->session_expires_at > now()) {
-            $response = redirect()->route('client.menu.home');
-            return $response->cookie('table_session_id', $table->session_id, 90);
-        }
-
+        
         $sessionId = Str::uuid();
-        $table->session_id = $sessionId;
-        $table->session_expires_at = now()->addMinutes(90);
-        $table->save();
+        $table = Table::create([
+            'number' => $tableNumber,
+            'lang' => $request->lang,
+            'person_count' => $request->person_count,
+            'session_id' => $sessionId,
+            'session_expires_at' => now()->addMinutes(90),
+        ]);
 
-        $response = redirect()->route('client.menu.home');
-        return $response->cookie('table_session_id', $sessionId, 90);
+        $response = redirect()->route('client.menu.top');
+        return $response->cookie('tableSessionId', $sessionId);
     }
 }
