@@ -20,7 +20,7 @@ class SetupController extends Controller
 
     public function store(Request $request)
     {
-        $tableNumber = $request->cookie('table_number');
+        $tableNumber = $request->cookie('TableNumber');
         if (!$tableNumber) {
             return redirect()->route('client.menu.index');
         }
