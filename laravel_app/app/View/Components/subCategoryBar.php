@@ -9,11 +9,24 @@ use Illuminate\View\Component;
 class subCategoryBar extends Component
 {
     /**
+     * The sub categories collection.
+     *
+     * @var \Illuminate\Database\Eloquent\Collection
+     */
+    public $subCategories;
+    /**
+     * The selected sub category ID.
+     *
+     * @var int
+     */
+    public $selectSubCategoryId;
+    /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($subCategories = null, $selectSubCategoryId = 0)
     {
-        //
+        $this->subCategories = $subCategories ?: collect();  
+        $this->selectSubCategoryId = (int)$selectSubCategoryId;
     }
 
     /**
@@ -21,6 +34,9 @@ class subCategoryBar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.sub-category-bar');
-    }
+        return view('components.sub-category-bar', [
+            'subCategories' => $this->subCategories,
+            'selectSubCategoryId' => $this->selectSubCategoryId
+        ]);
+    }   
 }

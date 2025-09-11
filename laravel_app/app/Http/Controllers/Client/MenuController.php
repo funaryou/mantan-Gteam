@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\BigCategory;
+use App\Models\SubCategory;
+use Illuminate\Support\Facades\Log;
 
 class MenuController extends Controller
 {
@@ -24,23 +26,46 @@ class MenuController extends Controller
             }
         }
 
-        return view('Page.UserSide.menu-top', compact('menusPickImages'));
+        return view('Page.UserSide.menu-top', compact('menusPickImages', 'bigCategories'));
     }
     public function index(Request $request)
     {
-        $bigCategoryId = intval($request->cookie('bigCategoryID'));
-        $subCategoryId = intval($request->cookie('subCategoryID'));
-
-        return view('Page.UserSide.menu-index', compact('bigCategoryId', 'subCategoryId'));
+        $selectBigCategoryId = intval($request->cookie('selectBigCategoryID', 0));
+        $selectSubCategoryId = intval($request->cookie('selectSubCategoryID', 0));
+        
+        // Debug: Log the cookie values
+        Log::info('Cookie values:', [
+            'selectBigCategoryID' => $request->cookie('selectBigCategoryID'),
+            'selectSubCategoryID' => $request->cookie('selectSubCategoryID')
+        ]);
+        
+        // Get all big categories
+        $bigCategories = BigCategory::all();
+        
+        // Get sub categories based on selected big category
+        $subCategories = collect();
+        if ($selectBigCategoryId > 0) {
+            $subCategories = SubCategory::where('big_category_id', $selectBigCategoryId)->get();
+        }
+        
+        // Debug: Log the retrieved categories
+        Log::info('Retrieved big categories:', $bigCategories->toArray());
+        Log::info('Retrieved sub categories:', $subCategories->toArray());
+        return view('Page.UserSide.menu-index', [
+            'selectBigCategoryId' => $selectBigCategoryId,
+            'selectSubCategoryId' => $selectSubCategoryId,
+            'bigCategories' => $bigCategories,
+            'subCategories' => $subCategories
+        ]);
     }
     public function setCookies(Request $request)
     {
-        $bigCategoryId = $request->input('bigCategoryID');
-        $subCategoryId = $request->input('subCategoryID');
-
+        $selectBigCategoryId = $request->input('bigCategoryID');
+        $selectSubCategoryId = $request->input('subCategoryID');
+        
         // Laravelがクッキーを自動的に暗号化します
         return response()->json(['status' => 'success'])
-            ->cookie('bigCategoryID', $bigCategoryId, 60)
-            ->cookie('subCategoryID', $subCategoryId, 60);
+            ->cookie('selectBigCategoryID', $selectBigCategoryId, 60)
+            ->cookie('selectSubCategoryID', $selectSubCategoryId, 60);
     }
 }

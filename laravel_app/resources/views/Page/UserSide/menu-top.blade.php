@@ -29,9 +29,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // カテゴリセットボタンの処理
             const buttons = document.querySelectorAll('.category-set-button');
             buttons.forEach(button => {
-                button.addEventListener('click', async () => {
+                button.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
                     const bigCatId = button.dataset.bigCatId;
                     const subCatId = button.dataset.subCatId;
                     

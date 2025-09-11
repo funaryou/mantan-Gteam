@@ -156,80 +156,196 @@ input[type="radio"] + label {
 	}
 }
 
-        /* メニューレイアウト部分 */
-        .menu-top-section {
-            padding: 16px;
-            box-sizing: border-box;
-            height: 100vh;
-        }
+/* メニューレイアウト部分 */
+.menu-top-section {
+    padding: 16px;
+    box-sizing: border-box;
+    height: 100vh;
+}
 
-        .menu-top-box {
-            display: flex;
-            height: 100%;
-            gap: 16px;
-        }
+.menu-top-box {
+    display: flex;
+    height: 100%;
+    gap: 16px;
+}
 
-        .menu-left-box {
-            flex: 1; /* 親要素の幅を均等に占める */
-        }
+.menu-left-box {
+    flex: 1; /* 親要素の幅を均等に占める */
+}
 
-        .menu-right-box {
-            flex: 1; /* 親要素の幅を均等に占める */
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+.menu-right-box {
+    flex: 1; /* 親要素の幅を均等に占める */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
-        .menu-right-top-box {
-            flex: 1; /* 親要素の高さを均等に占める */
-        }
+.menu-right-top-box {
+    flex: 1; /* 親要素の高さを均等に占める */
+}
 
-        .menu-right-bottom-box {
-            flex: 1; /* 親要素の高さを均等に占める */
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 16px;
-        }
-        
-        .home-card {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border-radius: 70px;
-            overflow: hidden;
-            position: relative;
-        }
+.menu-right-bottom-box {
+    flex: 1; /* 親要素の高さを均等に占める */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 16px;
+}
 
-        .home-card{
-			button{
-				width: 100%;
-				height: 100%;
-			}
-			button:hover {
-				opacity: 0.8;  /* ホバー効果を追加 */
-				transition: opacity 0.3s;
-			}
-        }
-        
-        .category-image-item {
-            width: 100%;
-            height: 100%;
-            background-size: cover , cover;
-            background-position: center , center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--main-text-color);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+.home-card {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 70px;
+    overflow: hidden;
+    position: relative;
+}
 
-        .category-image-item p {
-            margin: 0;
-            line-height: 1;
-        }
+.home-card{
+	button{
+		width: 100%;
+		height: 100%;
+	}
+	button:hover {
+		opacity: 0.8;  /* ホバー効果を追加 */
+		transition: opacity 0.3s;
+	}
+}
+
+.category-image-item {
+    width: 100%;
+    height: 100%;
+    background-size: cover , cover;
+    background-position: center , center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-text-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.category-image-item p {
+    margin: 0;
+    line-height: 1;
+}
+
+.category-bar{
+	display: block;
+	
+}
+
+.big-category-bar{
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 8px 0;
+	margin: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    position: relative;
+    scroll-snap-type: x mandatory;
+	border-bottom: 2px solid var(--main-text-color);
+}
+.big-category-bar::-webkit-scrollbar {
+    display: none;
+}
+.big-category-button{
+	margin: 16px;
+	flex: 0 0 auto;
+	scroll-snap-align: start;
+	
+	label{
+		display: block;
+		text-align: center;
+		padding: 26px 40px;
+		background-color: var(--button-color);
+		border-radius: 32px 32px 0 0;
+		cursor: pointer;
+		position: relative;
+		overflow: hidden;
+		transition: all 0.3s ease;
+		user-select: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+	}
+	
+	input[type="radio"]:checked + label {
+		background-color: var(--button-used-color);
+		border: 2px solid var(--main-text-color);
+		box-shadow: 
+			inset 3px 3px 6px rgba(0, 0, 0, 0.4),
+			inset -1px -1px 2px rgba(255, 255, 255, 0.3),
+			0 2px 4px rgba(0, 0, 0, 0.3), 
+			0 4px 8px rgba(0, 0, 0, 0.2);
+		transform: translateY(-1px);
+	}
+	
+	label:hover {
+		opacity: 0.9;
+		transform: translateY(-1px);
+	}
+}
+
+/* サブカテゴリーバーのスタイル */
+.sub-category-bar{
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 8px 0;
+	margin: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    position: relative;
+    scroll-snap-type: x mandatory;
+}
+.sub-category-bar::-webkit-scrollbar {
+    display: none;
+}
+.sub-category-button{
+	margin: 8px;
+	flex: 0 0 auto;
+	scroll-snap-align: start;
+	
+	
+	label{
+		display: block;
+		text-align: center;
+		padding: 16px 24px;
+		background-color: var(--button-color);
+		border-radius: 32px;
+		cursor: pointer;
+		position: relative;
+		overflow: hidden;
+		transition: all 0.3s ease;
+		user-select: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+	}
+	
+	input[type="radio"]:checked + label {
+		background-color: var(--button-used-color);
+		border: 2px solid var(--main-text-color);
+		box-shadow: 
+			inset 2px 2px 4px rgba(0, 0, 0, 0.4),
+			inset -1px -1px 2px rgba(255, 255, 255, 0.3),
+			0 1px 2px rgba(0, 0, 0, 0.3), 
+			0 2px 4px rgba(0, 0, 0, 0.2);
+		transform: translateY(-1px);
+	}
+	
+	label:hover {
+		opacity: 0.9;
+		transform: translateY(-1px);
+	}
+}
