@@ -149,9 +149,87 @@ input[type="radio"] + label {
 		margin : 0 auto;
 		border-radius: 53px;
 		color: var(--setup-box-text-color);
-		min-width: 200px;  /* ラベルにも同じ最小幅を設定 */
-		display: inline-block;  /* インラインブロックで幅を適用 */
-		text-align: center;  /* テキストを中央寄せ */
-		box-sizing: border-box;  /* パディングを含めた幅計算 */
+		min-width: 200px; 
+		display: inline-block;  
+		text-align: center; 	
+		box-sizing: border-box; 
 	}
 }
+
+        /* メニューレイアウト部分 */
+        .menu-top-section {
+            padding: 16px;
+            box-sizing: border-box;
+            height: 100vh;
+        }
+
+        .menu-top-box {
+            display: flex;
+            height: 100%;
+            gap: 16px;
+        }
+
+        .menu-left-box {
+            flex: 1; /* 親要素の幅を均等に占める */
+        }
+
+        .menu-right-box {
+            flex: 1; /* 親要素の幅を均等に占める */
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .menu-right-top-box {
+            flex: 1; /* 親要素の高さを均等に占める */
+        }
+
+        .menu-right-bottom-box {
+            flex: 1; /* 親要素の高さを均等に占める */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .home-card {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 70px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .home-card{
+			button{
+				width: 100%;
+				height: 100%;
+			}
+			button:hover {
+				opacity: 0.8;  /* ホバー効果を追加 */
+				transition: opacity 0.3s;
+			}
+        }
+        
+        .category-image-item {
+            width: 100%;
+            height: 100%;
+            background-size: cover , cover;
+            background-position: center , center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--main-text-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .category-image-item p {
+            margin: 0;
+            line-height: 1;
+        }
