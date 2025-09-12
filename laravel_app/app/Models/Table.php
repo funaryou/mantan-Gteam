@@ -17,4 +17,9 @@ class Table extends Model
     protected $casts = [
         'session_expires_at' => 'datetime',
     ];
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

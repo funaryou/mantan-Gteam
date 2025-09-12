@@ -27,43 +27,16 @@
     </section>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <script src="{{ asset('js/menu-top.js') }}"></script>
     <script>
+        // ルート情報をグローバル変数として定義
+        window.routes = {
+            setCookies: '{{ route("client.menu.setCookies") }}',
+            menuIndex: '{{ route("client.menu.index") }}'
+        };
+        
         document.addEventListener('DOMContentLoaded', () => {
-            // カテゴリセットボタンの処理
-            const buttons = document.querySelectorAll('.category-set-button');
-            buttons.forEach(button => {
-                button.addEventListener('click', async (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const bigCatId = button.dataset.bigCatId;
-                    const subCatId = button.dataset.subCatId;
-                    
-                    try {
-                        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            
-                        const response = await fetch('{{ route("client.menu.setCookies") }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': csrfToken,
-                            },
-                            body: JSON.stringify({
-                                bigCategoryID: bigCatId,
-                                subCategoryID: subCatId
-                            })
-                        });
-            
-                        if (response.ok) {
-                            window.location.href = "{{ route('client.menu.index') }}";
-                        } else {
-                            console.error('Failed to save cookies on server.');
-                        }
-                    } catch (error) {
-                        console.error('An error occurred:', error);
-                    }
-                });
-            });
+            initCategorySetButtons();
         });
     </script>
 </x-layout-set>
