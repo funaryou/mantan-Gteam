@@ -13,6 +13,7 @@
         if ({{ session()->has('error') }}) {
             console.log('{{ session()->get('error') }}');
         }
+        
     </script>
 </body>
 </html>

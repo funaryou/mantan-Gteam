@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckTabletSession
 {
+    
     public function handle(Request $request, Closure $next): Response
     {
         $sessionId = $request->cookie('tableSessionId');

@@ -27,6 +27,7 @@ Route::prefix('/client')->group(function () {
             Route::get('/search', [MenuController::class, 'search'])->name('client.menu.search');
             Route::get('/{id}', [MenuController::class, 'detail'])->name('client.menu.detail');
             Route::post('/{id}/store', [MenuController::class, 'store'])->name('client.menu.store');  
+            Route::post('/set_cookies', [MenuController::class, 'setCookies'])->name('client.menu.setCookies');
         });
         Route::prefix('/order')->group(function () {
             Route::get('/cart', [OrderController::class, 'index'])->name('client.order.cart');
